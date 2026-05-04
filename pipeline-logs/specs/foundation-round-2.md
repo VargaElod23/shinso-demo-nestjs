@@ -1,6 +1,6 @@
 # Module Spec: foundation
-Round: 2 | Similarity: 78%
-Generated: 2026-05-04T18:00:19.377Z
+Round: 2 | Similarity: 87%
+Generated: 2026-05-04T19:23:14.889Z
 
 ## Function Mapping
 
@@ -9,32 +9,46 @@ Generated: 2026-05-04T18:00:19.377Z
 - Automatic tenant scoping via HasTenantScope trait
 **Extra (not in source):**
 - Manual tenant_id parameter and filtering
-- Explicit async/await
 
 ### 🟡 CategoryService.getAll → CategoryService.getAll (75%)
 **Missing:**
 - Automatic tenant scoping via HasTenantScope trait
 **Extra (not in source):**
 - Manual tenant_id parameter and filtering
-- Explicit async/await
 
-### ✅ Category.scopeOfType → CategoryService.scopeOfType (85%)
+### ✅ NotificationService.getUnreadForUser → NotificationService.getUnreadForUser (90%)
+
+### ✅ NotificationService.send → NotificationService.send (85%)
+**Missing:**
+- Automatic tenant_id assignment
+
+### ✅ NotificationService.markAllReadForUser → NotificationService.markAllReadForUser (90%)
+
+### ✅ TagService.getActive → TagService.getActive (90%)
+
+### ✅ TagService.getByColor → TagService.getByColor (90%)
+
+### ✅ TagService.create → TagService.create (85%)
+**Missing:**
+- Laravel's str() helper for slug generation
+- Automatic tenant_id assignment
 **Extra (not in source):**
-- Private method instead of public scope
-- Different parameter signature
+- Manual slug generation with replace logic
 
-### ✅ Category.scopeActive → CategoryService.scopeActive (90%)
-**Extra (not in source):**
-- Private method instead of public scope
+### ✅ TagService.attachToCategory → TagService.attachToCategory (80%)
 
-## Unmapped Source Functions
-- ❌ Category.listings
-- ❌ Category.events
-- ❌ Category.posts
-- ❌ Category.parent
-- ❌ Category.children
+### ✅ Category.scopeOfType → CategoryService.scopeOfType (95%)
 
-## Extra Target Functions (not in source)
-- Category entity field definitions
-- Category.createQueryBuilder
-- Category.getRepository
+### ✅ Category.scopeActive → CategoryService.scopeActive (95%)
+
+### ✅ Notification.scopeUnread → Notification.scopeUnread (95%)
+
+### ✅ Notification.scopeOfType → Notification.scopeOfType (95%)
+
+### ✅ Notification.markAsRead → Notification.markAsRead (85%)
+**Missing:**
+- Database persistence via update()
+
+### ✅ Tag.scopeActive → Tag.scopeActive (95%)
+
+### ✅ Tag.scopeByColor → Tag.scopeByColor (95%)
