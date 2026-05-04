@@ -6,5 +6,3 @@ export { AdminId } from './auth/admin-id.decorator';
 export { ActivityLogService } from './activity-log/activity-log.service';
 export { RateLimitGuard } from './shared/rate-limit.guard';
 export { PaginationDto, decodeCursor, encodeCursor } from './shared/pagination.dto';
-export { CategoryService } from './category/category.service';
-export { Category } from './category/category.entity';

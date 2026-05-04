@@ -1,6 +1,6 @@
 # Foundation Spec
-Extracted: 2026-05-04T17:59:34.874Z
-Total classes: 3 | Foundation: 0 (0%)
+Extracted: 2026-05-04T18:30:30.446Z
+Total classes: 5 | Foundation: 0 (0%)
 Threshold: 15%+ dependents
 
 ## Foundation Modules

@@ -6,48 +6,25 @@
       "targetFn": "CategoryService.getByType",
       "scores": {
         "coverage": 1,
-        "logicFidelity": 0.75,
-        "dataFlow": 0.75,
-        "sideEffects": 0.75,
-        "edgeCases": 0.75,
-        "overall": 0.75
+        "logicFidelity": 0.85,
+        "dataFlow": 0.85,
+        "sideEffects": 0.85,
+        "edgeCases": 0.85,
+        "overall": 0.85
       },
       "missingLogic": [
-        "Automatic tenant scoping via HasTenantScope trait"
+        "automatic tenant scoping via HasTenantScope trait"
       ],
       "extraLogic": [
-        "Manual tenant_id parameter and filtering",
-        "Explicit async/await"
+        "explicit tenantId parameter and manual tenant filtering"
       ],
       "notes": [
-        "Core logic identical but tenant handling differs - source uses global scope, target requires explicit tenant parameter"
+        "Core logic identical but tenant scoping implementation differs - source uses global scope, target uses explicit parameter"
       ]
     },
     {
       "sourceFn": "CategoryService.getAll",
       "targetFn": "CategoryService.getAll",
-      "scores": {
-        "coverage": 1,
-        "logicFidelity": 0.75,
-        "dataFlow": 0.75,
-        "sideEffects": 0.75,
-        "edgeCases": 0.75,
-        "overall": 0.75
-      },
-      "missingLogic": [
-        "Automatic tenant scoping via HasTenantScope trait"
-      ],
-      "extraLogic": [
-        "Manual tenant_id parameter and filtering",
-        "Explicit async/await"
-      ],
-      "notes": [
-        "Same ordering logic but different tenant handling approach"
-      ]
-    },
-    {
-      "sourceFn": "Category.scopeOfType",
-      "targetFn": "CategoryService.scopeOfType",
       "scores": {
         "coverage": 1,
         "logicFidelity": 0.85,
@@ -56,13 +33,31 @@
         "edgeCases": 0.85,
         "overall": 0.85
       },
-      "missingLogic": [],
+      "missingLogic": [
+        "automatic tenant scoping via HasTenantScope trait"
+      ],
       "extraLogic": [
-        "Private method instead of public scope",
-        "Different parameter signature"
+        "explicit tenantId parameter and manual tenant filtering"
       ],
       "notes": [
-        "Logic is equivalent but implemented as private helper instead of Eloquent scope"
+        "Same ordering logic but different tenant scoping approach"
+      ]
+    },
+    {
+      "sourceFn": "Category.scopeOfType",
+      "targetFn": "CategoryService.scopeOfType",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.75,
+        "dataFlow": 0.75,
+        "sideEffects": 0.75,
+        "edgeCases": 0.75,
+        "overall": 0.75
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Logic moved from model scope to private service method, functionality equivalent"
       ]
     },
     {
@@ -77,24 +72,114 @@
         "overall": 0.9
       },
       "missingLogic": [],
-      "extraLogic": [
-        "Private method instead of public scope"
-      ],
+      "extraLogic": [],
       "notes": [
-        "Identical no-op logic, just different implementation pattern"
+        "Both correctly implement no-op since categories have no status column"
+      ]
+    },
+    {
+      "sourceFn": "Category.listings",
+      "targetFn": "Category.listings",
+      "scores": {
+        "coverage": 0,
+        "logicFidelity": 0.2,
+        "dataFlow": 0.2,
+        "sideEffects": 0.2,
+        "edgeCases": 0.2,
+        "overall": 0.2
+      },
+      "missingLogic": [
+        "actual TypeORM relationship definition"
+      ],
+      "extraLogic": [],
+      "notes": [
+        "Source has proper Eloquent relationship, target has placeholder any[] type"
+      ]
+    },
+    {
+      "sourceFn": "Category.events",
+      "targetFn": "Category.events",
+      "scores": {
+        "coverage": 0,
+        "logicFidelity": 0.2,
+        "dataFlow": 0.2,
+        "sideEffects": 0.2,
+        "edgeCases": 0.2,
+        "overall": 0.2
+      },
+      "missingLogic": [
+        "actual TypeORM relationship definition"
+      ],
+      "extraLogic": [],
+      "notes": [
+        "Source has proper Eloquent relationship, target has placeholder any[] type"
+      ]
+    },
+    {
+      "sourceFn": "Category.posts",
+      "targetFn": "Category.posts",
+      "scores": {
+        "coverage": 0,
+        "logicFidelity": 0.2,
+        "dataFlow": 0.2,
+        "sideEffects": 0.2,
+        "edgeCases": 0.2,
+        "overall": 0.2
+      },
+      "missingLogic": [
+        "actual TypeORM relationship definition"
+      ],
+      "extraLogic": [],
+      "notes": [
+        "Source has proper Eloquent relationship, target has placeholder any[] type"
+      ]
+    },
+    {
+      "sourceFn": "Category.parent",
+      "targetFn": "Category.parent",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Both properly implement self-referencing parent relationship"
+      ]
+    },
+    {
+      "sourceFn": "Category.children",
+      "targetFn": "Category.children",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Both properly implement self-referencing children relationship"
       ]
     }
   ],
-  "overallScore": 78,
+  "overallScore": 75,
   "unmappedSourceFns": [
-    "Category.listings",
-    "Category.events",
-    "Category.posts",
-    "Category.parent",
-    "Category.children"
+    "TagService.getActive",
+    "TagService.getByColor",
+    "TagService.create",
+    "TagService.attachToCategory",
+    "Tag.categories",
+    "Tag.scopeActive",
+    "Tag.scopeByColor"
   ],
   "unmappedTargetFns": [
-    "Category entity field definitions",
     "Category.createQueryBuilder",
     "Category.getRepository"
   ]
