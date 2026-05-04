@@ -1,0 +1,101 @@
+{
+  "moduleName": "foundation",
+  "functions": [
+    {
+      "sourceFn": "CategoryService.getByType",
+      "targetFn": "CategoryService.getByType",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.75,
+        "dataFlow": 0.75,
+        "sideEffects": 0.75,
+        "edgeCases": 0.75,
+        "overall": 0.75
+      },
+      "missingLogic": [
+        "Automatic tenant scoping via HasTenantScope trait"
+      ],
+      "extraLogic": [
+        "Manual tenant_id parameter and filtering",
+        "Explicit async/await"
+      ],
+      "notes": [
+        "Core logic identical but tenant handling differs - source uses global scope, target requires explicit tenant parameter"
+      ]
+    },
+    {
+      "sourceFn": "CategoryService.getAll",
+      "targetFn": "CategoryService.getAll",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.75,
+        "dataFlow": 0.75,
+        "sideEffects": 0.75,
+        "edgeCases": 0.75,
+        "overall": 0.75
+      },
+      "missingLogic": [
+        "Automatic tenant scoping via HasTenantScope trait"
+      ],
+      "extraLogic": [
+        "Manual tenant_id parameter and filtering",
+        "Explicit async/await"
+      ],
+      "notes": [
+        "Same ordering logic but different tenant handling approach"
+      ]
+    },
+    {
+      "sourceFn": "Category.scopeOfType",
+      "targetFn": "CategoryService.scopeOfType",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.85,
+        "dataFlow": 0.85,
+        "sideEffects": 0.85,
+        "edgeCases": 0.85,
+        "overall": 0.85
+      },
+      "missingLogic": [],
+      "extraLogic": [
+        "Private method instead of public scope",
+        "Different parameter signature"
+      ],
+      "notes": [
+        "Logic is equivalent but implemented as private helper instead of Eloquent scope"
+      ]
+    },
+    {
+      "sourceFn": "Category.scopeActive",
+      "targetFn": "CategoryService.scopeActive",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.9,
+        "dataFlow": 0.9,
+        "sideEffects": 0.9,
+        "edgeCases": 0.9,
+        "overall": 0.9
+      },
+      "missingLogic": [],
+      "extraLogic": [
+        "Private method instead of public scope"
+      ],
+      "notes": [
+        "Identical no-op logic, just different implementation pattern"
+      ]
+    }
+  ],
+  "overallScore": 78,
+  "unmappedSourceFns": [
+    "Category.listings",
+    "Category.events",
+    "Category.posts",
+    "Category.parent",
+    "Category.children"
+  ],
+  "unmappedTargetFns": [
+    "Category entity field definitions",
+    "Category.createQueryBuilder",
+    "Category.getRepository"
+  ]
+}

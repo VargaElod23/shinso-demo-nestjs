@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "gate": "output_hygiene",
+      "passed": true,
+      "errors": [],
+      "fixed": 0
+    },
+    {
+      "gate": "route_integrity",
+      "passed": true,
+      "errors": [],
+      "fixed": 0
+    },
+    {
+      "gate": "module_wiring",
+      "passed": false,
+      "errors": [
+        "Missing: src/app.module.ts"
+      ],
+      "fixed": 0
+    },
+    {
+      "gate": "dependency_check",
+      "passed": false,
+      "errors": [
+        "Missing package.json"
+      ],
+      "fixed": 0
+    },
+    {
+      "gate": "stub_count",
+      "passed": true,
+      "errors": [],
+      "fixed": 0
+    }
+  ],
+  "allPassed": false,
+  "totalErrors": 2,
+  "totalFixed": 0
+}
