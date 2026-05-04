@@ -1,40 +1,50 @@
 # Module Spec: foundation
-Round: 2 | Similarity: 78%
-Generated: 2026-05-04T18:00:19.377Z
+Round: 1 | Similarity: 75%
+Generated: 2026-05-04T18:30:53.731Z
 
 ## Function Mapping
 
-### 🟡 CategoryService.getByType → CategoryService.getByType (75%)
+### ✅ CategoryService.getByType → CategoryService.getByType (85%)
 **Missing:**
-- Automatic tenant scoping via HasTenantScope trait
+- automatic tenant scoping via HasTenantScope trait
 **Extra (not in source):**
-- Manual tenant_id parameter and filtering
-- Explicit async/await
+- explicit tenantId parameter and manual tenant filtering
 
-### 🟡 CategoryService.getAll → CategoryService.getAll (75%)
+### ✅ CategoryService.getAll → CategoryService.getAll (85%)
 **Missing:**
-- Automatic tenant scoping via HasTenantScope trait
+- automatic tenant scoping via HasTenantScope trait
 **Extra (not in source):**
-- Manual tenant_id parameter and filtering
-- Explicit async/await
+- explicit tenantId parameter and manual tenant filtering
 
-### ✅ Category.scopeOfType → CategoryService.scopeOfType (85%)
-**Extra (not in source):**
-- Private method instead of public scope
-- Different parameter signature
+### 🟡 Category.scopeOfType → CategoryService.scopeOfType (75%)
 
 ### ✅ Category.scopeActive → CategoryService.scopeActive (90%)
-**Extra (not in source):**
-- Private method instead of public scope
+
+### ❌ Category.listings → Category.listings (20%)
+**Missing:**
+- actual TypeORM relationship definition
+
+### ❌ Category.events → Category.events (20%)
+**Missing:**
+- actual TypeORM relationship definition
+
+### ❌ Category.posts → Category.posts (20%)
+**Missing:**
+- actual TypeORM relationship definition
+
+### ✅ Category.parent → Category.parent (95%)
+
+### ✅ Category.children → Category.children (95%)
 
 ## Unmapped Source Functions
-- ❌ Category.listings
-- ❌ Category.events
-- ❌ Category.posts
-- ❌ Category.parent
-- ❌ Category.children
+- ❌ TagService.getActive
+- ❌ TagService.getByColor
+- ❌ TagService.create
+- ❌ TagService.attachToCategory
+- ❌ Tag.categories
+- ❌ Tag.scopeActive
+- ❌ Tag.scopeByColor
 
 ## Extra Target Functions (not in source)
-- Category entity field definitions
 - Category.createQueryBuilder
 - Category.getRepository
