@@ -16,11 +16,10 @@
         "Automatic tenant scoping via HasTenantScope trait"
       ],
       "extraLogic": [
-        "Manual tenant_id parameter and filtering",
-        "Explicit async/await"
+        "Manual tenant_id parameter and filtering"
       ],
       "notes": [
-        "Core logic identical but tenant handling differs - source uses global scope, target requires explicit tenant parameter"
+        "Core logic identical but tenant handling differs - source uses trait, target requires explicit parameter"
       ]
     },
     {
@@ -38,36 +37,15 @@
         "Automatic tenant scoping via HasTenantScope trait"
       ],
       "extraLogic": [
-        "Manual tenant_id parameter and filtering",
-        "Explicit async/await"
+        "Manual tenant_id parameter and filtering"
       ],
       "notes": [
-        "Same ordering logic but different tenant handling approach"
+        "Same ordering logic but different tenant scoping approach"
       ]
     },
     {
-      "sourceFn": "Category.scopeOfType",
-      "targetFn": "CategoryService.scopeOfType",
-      "scores": {
-        "coverage": 1,
-        "logicFidelity": 0.85,
-        "dataFlow": 0.85,
-        "sideEffects": 0.85,
-        "edgeCases": 0.85,
-        "overall": 0.85
-      },
-      "missingLogic": [],
-      "extraLogic": [
-        "Private method instead of public scope",
-        "Different parameter signature"
-      ],
-      "notes": [
-        "Logic is equivalent but implemented as private helper instead of Eloquent scope"
-      ]
-    },
-    {
-      "sourceFn": "Category.scopeActive",
-      "targetFn": "CategoryService.scopeActive",
+      "sourceFn": "NotificationService.getUnreadForUser",
+      "targetFn": "NotificationService.getUnreadForUser",
       "scores": {
         "coverage": 1,
         "logicFidelity": 0.9,
@@ -77,25 +55,243 @@
         "overall": 0.9
       },
       "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Identical logic, just different ORM syntax"
+      ]
+    },
+    {
+      "sourceFn": "NotificationService.send",
+      "targetFn": "NotificationService.send",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.85,
+        "dataFlow": 0.85,
+        "sideEffects": 0.85,
+        "edgeCases": 0.85,
+        "overall": 0.85
+      },
+      "missingLogic": [
+        "Automatic tenant_id assignment"
+      ],
+      "extraLogic": [],
+      "notes": [
+        "Core creation logic same, but missing tenant scoping"
+      ]
+    },
+    {
+      "sourceFn": "NotificationService.markAllReadForUser",
+      "targetFn": "NotificationService.markAllReadForUser",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.9,
+        "dataFlow": 0.9,
+        "sideEffects": 0.9,
+        "edgeCases": 0.9,
+        "overall": 0.9
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Same bulk update logic, returns affected count"
+      ]
+    },
+    {
+      "sourceFn": "TagService.getActive",
+      "targetFn": "TagService.getActive",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.9,
+        "dataFlow": 0.9,
+        "sideEffects": 0.9,
+        "edgeCases": 0.9,
+        "overall": 0.9
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Identical filtering and ordering logic"
+      ]
+    },
+    {
+      "sourceFn": "TagService.getByColor",
+      "targetFn": "TagService.getByColor",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.9,
+        "dataFlow": 0.9,
+        "sideEffects": 0.9,
+        "edgeCases": 0.9,
+        "overall": 0.9
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Same logic combining active scope with color filter"
+      ]
+    },
+    {
+      "sourceFn": "TagService.create",
+      "targetFn": "TagService.create",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.85,
+        "dataFlow": 0.85,
+        "sideEffects": 0.85,
+        "edgeCases": 0.85,
+        "overall": 0.85
+      },
+      "missingLogic": [
+        "Laravel's str() helper for slug generation",
+        "Automatic tenant_id assignment"
+      ],
       "extraLogic": [
-        "Private method instead of public scope"
+        "Manual slug generation with replace logic"
       ],
       "notes": [
-        "Identical no-op logic, just different implementation pattern"
+        "Core creation logic equivalent, different slug generation approach"
+      ]
+    },
+    {
+      "sourceFn": "TagService.attachToCategory",
+      "targetFn": "TagService.attachToCategory",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.8,
+        "dataFlow": 0.8,
+        "sideEffects": 0.8,
+        "edgeCases": 0.8,
+        "overall": 0.8
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Different syntax but equivalent many-to-many attachment"
+      ]
+    },
+    {
+      "sourceFn": "Category.scopeOfType",
+      "targetFn": "CategoryService.scopeOfType",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Moved from model to service, same filtering logic"
+      ]
+    },
+    {
+      "sourceFn": "Category.scopeActive",
+      "targetFn": "CategoryService.scopeActive",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "No-op scope implemented identically"
+      ]
+    },
+    {
+      "sourceFn": "Notification.scopeUnread",
+      "targetFn": "Notification.scopeUnread",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Static method with same null check logic"
+      ]
+    },
+    {
+      "sourceFn": "Notification.scopeOfType",
+      "targetFn": "Notification.scopeOfType",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Static method with identical type filtering"
+      ]
+    },
+    {
+      "sourceFn": "Notification.markAsRead",
+      "targetFn": "Notification.markAsRead",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.85,
+        "dataFlow": 0.85,
+        "sideEffects": 0.85,
+        "edgeCases": 0.85,
+        "overall": 0.85
+      },
+      "missingLogic": [
+        "Database persistence via update()"
+      ],
+      "extraLogic": [],
+      "notes": [
+        "Sets read_at but doesn't persist to database"
+      ]
+    },
+    {
+      "sourceFn": "Tag.scopeActive",
+      "targetFn": "Tag.scopeActive",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Static method with same boolean check logic"
+      ]
+    },
+    {
+      "sourceFn": "Tag.scopeByColor",
+      "targetFn": "Tag.scopeByColor",
+      "scores": {
+        "coverage": 1,
+        "logicFidelity": 0.95,
+        "dataFlow": 0.95,
+        "sideEffects": 0.95,
+        "edgeCases": 0.95,
+        "overall": 0.95
+      },
+      "missingLogic": [],
+      "extraLogic": [],
+      "notes": [
+        "Static method with identical color filtering"
       ]
     }
   ],
-  "overallScore": 78,
-  "unmappedSourceFns": [
-    "Category.listings",
-    "Category.events",
-    "Category.posts",
-    "Category.parent",
-    "Category.children"
-  ],
-  "unmappedTargetFns": [
-    "Category entity field definitions",
-    "Category.createQueryBuilder",
-    "Category.getRepository"
-  ]
+  "overallScore": 87,
+  "unmappedSourceFns": [],
+  "unmappedTargetFns": []
 }

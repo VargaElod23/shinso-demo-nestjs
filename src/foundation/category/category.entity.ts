@@ -57,8 +57,13 @@ export class Category {
   children: Category[];
 
   // Dynamic relations - these would be defined in the actual business modules
+  @OneToMany('Listing', 'category')
   listings: any[];
+
+  @OneToMany('Event', 'category')
   events: any[];
+
+  @OneToMany('Post', 'category')
   posts: any[];
 
   // Query builder helpers for scopes
